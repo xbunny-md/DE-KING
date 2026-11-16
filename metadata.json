@@ -1,0 +1,6 @@
+{
+  "name": "DE-KING",
+  "description": "DE-KING multi-category commerce platform, verified seller center, digital gift cards, customer service portal, and role-based administration console powered by Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

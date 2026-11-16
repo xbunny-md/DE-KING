@@ -1,0 +1,755 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Private user account profile and shipping preferences (PII isolated to owner and admin).",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160,
+          "description": "User email address."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "Full display name."
+        },
+        "firstName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60
+        },
+        "lastName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60
+        },
+        "accountType": {
+          "type": "string",
+          "enum": ["personal", "business"]
+        },
+        "businessName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 40
+        },
+        "shipToCountry": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "postalCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 24
+        },
+        "addressLine": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 240
+        },
+        "role": {
+          "type": "string",
+          "enum": ["buyer", "seller", "admin"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "suspended"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "displayName", "accountType", "shipToCountry", "role", "status", "createdAt", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted administrator grant record managed exclusively by verified admins.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "grantedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "grantedBy", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Marketplace product listing.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 140
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "electronics",
+            "motors",
+            "fashion",
+            "collectibles-and-art",
+            "sports",
+            "health-and-beauty",
+            "industrial-equipment",
+            "home-and-garden"
+          ]
+        },
+        "brand": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "countryOfOrigin": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "condition": {
+          "type": "string",
+          "enum": ["new", "like-new", "excellent", "good", "fair"]
+        },
+        "buyingFormat": {
+          "type": "string",
+          "enum": ["buy-now", "outlet-deal", "bulk"]
+        },
+        "price": {
+          "type": "number"
+        },
+        "originalPrice": {
+          "type": "number"
+        },
+        "stockQuantity": {
+          "type": "integer"
+        },
+        "durationDays": {
+          "type": "integer"
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "isFeatured": {
+          "type": "boolean"
+        },
+        "isDeal": {
+          "type": "boolean"
+        },
+        "isOutlet": {
+          "type": "boolean"
+        },
+        "sellerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "sellerName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "draft", "sold-out", "archived"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "category",
+        "brand",
+        "countryOfOrigin",
+        "condition",
+        "buyingFormat",
+        "price",
+        "stockQuantity",
+        "durationDays",
+        "imageUrl",
+        "isFeatured",
+        "isDeal",
+        "isOutlet",
+        "sellerId",
+        "sellerName",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "Item inside a user's persistent shopping cart.",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "price": {
+          "type": "number"
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "sellerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["productId", "title", "price", "imageUrl", "sellerId", "quantity", "addedAt", "updatedAt"]
+    },
+    "SavedItem": {
+      "title": "SavedItem",
+      "description": "Product bookmarked in a user's watchlist.",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "price": {
+          "type": "number"
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "savedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["productId", "title", "price", "category", "imageUrl", "savedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer checkout order header.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buyerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buyerName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "buyerEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "shippingCountry": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "postalCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24
+        },
+        "shippingAddress": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 240
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["visa", "mastercard", "mpesa", "paypal", "gift-card"]
+        },
+        "giftCardCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 40
+        },
+        "subtotal": {
+          "type": "number"
+        },
+        "discountAmount": {
+          "type": "number"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "itemCount": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "processing", "shipped", "delivered", "cancelled", "refunded"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "buyerId",
+        "buyerName",
+        "buyerEmail",
+        "shippingCountry",
+        "postalCode",
+        "shippingAddress",
+        "paymentMethod",
+        "subtotal",
+        "discountAmount",
+        "totalAmount",
+        "itemCount",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "OrderItem": {
+      "title": "OrderItem",
+      "description": "Line item sub-document for an order.",
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "productId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "sellerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "unitPrice": {
+          "type": "number"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        }
+      },
+      "required": ["orderId", "productId", "sellerId", "title", "unitPrice", "quantity", "imageUrl"]
+    },
+    "GiftCard": {
+      "title": "GiftCard",
+      "description": "Digital or physical DE-KING gift card.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 40,
+          "pattern": "^[A-Z0-9\\-]+$"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "balance": {
+          "type": "number"
+        },
+        "recipientEmail": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 160
+        },
+        "recipientName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "message": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 300
+        },
+        "designTheme": {
+          "type": "string",
+          "enum": ["obsidian", "champagne", "cobalt", "celebration"]
+        },
+        "purchaserId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "redeemedBy": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "partially-used", "redeemed", "void"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "code",
+        "amount",
+        "balance",
+        "recipientName",
+        "designTheme",
+        "purchaserId",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "Customer support inquiry, return request, or missing item report.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "type": {
+          "type": "string",
+          "enum": ["general", "return", "missing-item", "account", "billing"]
+        },
+        "orderId": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 160
+        },
+        "message": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "enum": ["open", "in-review", "resolved", "closed"]
+        },
+        "adminNotes": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "userId", "name", "email", "type", "subject", "message", "status", "createdAt", "updatedAt"]
+    },
+    "NewsletterSubscriber": {
+      "title": "NewsletterSubscriber",
+      "description": "Newsletter subscription email record.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "AppSettings": {
+      "title": "AppSettings",
+      "description": "Storefront global configuration managed by admins.",
+      "type": "object",
+      "properties": {
+        "storeName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "supportEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "defaultCurrency": {
+          "type": "string",
+          "enum": ["USD", "TZS", "KES", "UGX"]
+        },
+        "freeShippingThreshold": {
+          "type": "number"
+        },
+        "announcementText": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 200
+        },
+        "maintenanceMode": {
+          "type": "boolean"
+        },
+        "updatedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["storeName", "supportEmail", "defaultCurrency", "freeShippingThreshold", "announcementText", "maintenanceMode", "updatedBy", "updatedAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable admin operation audit trail.",
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "actorEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "action": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "targetCollection": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "targetId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "details": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["actorId", "actorEmail", "action", "targetCollection", "targetId", "details", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private user account profiles and shipping settings."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted administrator access grants."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Marketplace product listings across all categories."
+    },
+    "/users/{userId}/cart/{itemId}": {
+      "schema": { "$ref": "#/entities/CartItem" },
+      "description": "Persistent shopping cart items per user."
+    },
+    "/users/{userId}/saved/{productId}": {
+      "schema": { "$ref": "#/entities/SavedItem" },
+      "description": "User watchlist / saved items."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer order headers."
+    },
+    "/orders/{orderId}/items/{itemId}": {
+      "schema": { "$ref": "#/entities/OrderItem" },
+      "description": "Line items belonging to an order."
+    },
+    "/giftCards/{cardId}": {
+      "schema": { "$ref": "#/entities/GiftCard" },
+      "description": "Issued DE-KING gift cards keyed by code."
+    },
+    "/supportTickets/{ticketId}": {
+      "schema": { "$ref": "#/entities/SupportTicket" },
+      "description": "Customer support inquiries, return requests, and missing item reports."
+    },
+    "/newsletterSubscribers/{subscriberId}": {
+      "schema": { "$ref": "#/entities/NewsletterSubscriber" },
+      "description": "Newsletter subscription emails."
+    },
+    "/appSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/AppSettings" },
+      "description": "Global storefront configuration document."
+    },
+    "/auditLogs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Immutable admin audit logs."
+    }
+  }
+}
